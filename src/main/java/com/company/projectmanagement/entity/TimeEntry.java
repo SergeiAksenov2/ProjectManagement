@@ -26,7 +26,7 @@ public class TimeEntry {
     @ManyToOne(fetch = FetchType.LAZY)
     private Task task;
 
-    @PositiveOrZero(message = "{msg://com.company.projectmanagement.entity/TimeEntry.timeSpent.validation.PositiveOrZero}")
+    @PositiveOrZero
     @Column(name = "TIME_SPENT", nullable = false)
     @NotNull
     private Integer timeSpent;
@@ -35,8 +35,8 @@ public class TimeEntry {
     @NotNull
     private LocalDateTime entryDate;
 
-    @JoinColumn(name = "USER_ID", nullable = false)
     @NotNull
+    @JoinColumn(name = "USER_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User user;
 

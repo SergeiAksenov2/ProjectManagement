@@ -30,7 +30,7 @@ public class Task {
     @NotNull
     private String name;
 
-    @FutureOrPresent(message = "{msg://com.company.projectmanagement.entity/Task.dueDate.validation.FutureOrPresent}")
+    @FutureOrPresent
     @Column(name = "DUE_DATE")
     private LocalDate dueDate;
 
@@ -45,7 +45,7 @@ public class Task {
     @Lob
     private String description;
 
-    @PositiveOrZero(message = "{msg://com.company.projectmanagement.entity/Task.estimation.validation.PositiveOrZero}")
+    @PositiveOrZero
     @Column(name = "ESTIMATION")
     private Integer estimation;
 
