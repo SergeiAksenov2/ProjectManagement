@@ -22,7 +22,6 @@ import java.util.UUID;
         @Index(name = "IDX_USER__ON_USERNAME", columnList = "USERNAME", unique = true)
 })
 public class User implements JmixUserDetails, HasTimeZone {
-
     @Id
     @Column(name = "ID", nullable = false)
     @JmixGeneratedValue
@@ -56,8 +55,19 @@ public class User implements JmixUserDetails, HasTimeZone {
     @Column(name = "TIME_ZONE_ID")
     protected String timeZoneId;
 
+    @Column(name = "AVATAR")
+    private byte[] avatar;
+
     @Transient
     protected Collection<? extends GrantedAuthority> authorities;
+
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
 
     public UUID getId() {
         return id;
