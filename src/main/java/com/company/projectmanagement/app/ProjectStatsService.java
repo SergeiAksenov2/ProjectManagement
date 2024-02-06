@@ -22,7 +22,7 @@ public class ProjectStatsService {
 
     public List<ProjectStats> fetchProjectStatistics() {
         List<Project> projects = dataManager.load(Project.class).all().list();
-        List<ProjectStats> projectStats2 = projects.stream()
+        List<ProjectStats> projectStats = projects.stream()
                 .map(project -> {
                     ProjectStats stat = dataManager.create(ProjectStats.class);
                     stat.setId(project.getId());
@@ -33,7 +33,7 @@ public class ProjectStatsService {
                     stat.setActualEfforts(getActualEfforts(project.getId()));
                     return stat;
                 }).collect(Collectors.toList());
-        return projectStats2;
+        return projectStats;
     }
 
     public Integer getActualEfforts(UUID projectId) {
