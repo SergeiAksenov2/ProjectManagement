@@ -8,6 +8,7 @@ import io.jmix.core.impl.DataManagerImpl;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -29,8 +30,16 @@ public class ProjectStatsService {
                     stat.setTasksCount(project.getTasks().size());
                     Integer plannedEfforts2 = project.getTasks().stream().map(Task::getEstimation).reduce(0, Integer::sum);
                     stat.setPlannedEfforts(plannedEfforts2);
+                    stat.setActualEfforts(getActualEfforts(project.getId()));
                     return stat;
                 }).collect(Collectors.toList());
         return projectStats2;
+    }
+
+    public Integer getActualEfforts(UUID projectId) {
+        return dataManager
+                .loadValue("select SUM(t.timeSpent) from TimeEntry t where t.task.project.id = :projectId", Integer.class)
+                .parameter("projectId", projectId)
+                .one();
     }
 }
