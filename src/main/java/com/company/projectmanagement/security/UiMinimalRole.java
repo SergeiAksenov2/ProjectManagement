@@ -19,10 +19,12 @@ public interface UiMinimalRole {
     void main();
 
     @ViewPolicy(viewIds = "LoginView")
-    @SpecificPolicy(resources = "ui.loginToUi")
     void login();
 
     @EntityPolicy(entityClass = KeyValueEntity.class, actions = EntityPolicyAction.READ)
     @EntityAttributePolicy(entityClass = KeyValueEntity.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
     void keyValueEntity();
+
+    @SpecificPolicy(resources = "ui.loginToUi")
+    void specific();
 }
